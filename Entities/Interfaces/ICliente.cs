@@ -5,12 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entities
+namespace Entities.Interfaces
 {
-    public interface IControl
+    public  interface ICliente
     {
-        List<Entities.Control> RetornarResultado(DataTable tbl);
-        
-
+        List<Entities.Cliente> RetornarResultadoCliente(DataTable tbl);
     }
 }

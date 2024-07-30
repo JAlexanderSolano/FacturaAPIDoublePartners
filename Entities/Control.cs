@@ -13,6 +13,7 @@ namespace Entities
         public string Id { get; set; }
         public string TipoCliente { get; set; }
 
+
         public Control() { }
 
         public Control(string id, string tipoCliente)
@@ -21,6 +22,7 @@ namespace Entities
             TipoCliente = tipoCliente;
         }
 
+        
 
         public List<Control> RetornarResultado(DataTable tbl)
         {
