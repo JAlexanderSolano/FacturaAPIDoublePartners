@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="Control.cs" />
     <Compile Include="Interfaces\IControl.cs" />
+    <Compile Include="Interfaces\IResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Result.cs" />
   </ItemGroup>

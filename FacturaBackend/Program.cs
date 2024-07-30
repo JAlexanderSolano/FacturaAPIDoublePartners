@@ -10,6 +10,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddControllers();
 builder.Services.AddCors();
 builder.Services.AddTransient<Entities.IControl, Entities.Control>();
+builder.Services.AddTransient<Entities.Interfaces.IResult, Entities.Result>();
 
 var app = builder.Build();
 

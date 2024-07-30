@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Entities.Interfaces;
+using FacturaBackend.EntryModels;
+using Microsoft.AspNetCore.Mvc;
+using System.Data;
+using System.Linq.Expressions;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,36 +12,28 @@ namespace FacturaBackend.Controllers
     [ApiController]
     public class ProductoController : ControllerBase
     {
-        // GET: api/<ProductoController>
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
+        private readonly Entities.Interfaces.IResult _IResult;
 
-        // GET api/<ProductoController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        public ProductoController(Entities.Interfaces.IResult result)
         {
-            return "value";
+            _IResult = result;
         }
-
         // POST api/<ProductoController>
-        [HttpPost]
-        public void Post([FromBody] string value)
+        [HttpPost("[action]")]
+        public IActionResult GuardarProducto([FromBody] RegistroProducto prod)
         {
-        }
+            try
+            {
+                List<Entities.Result> result = new List<Entities.Result>();
+                Bussnies.Productos _productos = new Bussnies.Productos();
+                DataTable tblResult = _productos.Guardar_Producto(prod.nombreProducto, prod.ImagenProducto, prod.PrecioUnitario, prod.ext);
+                result = _IResult.RetornarResultado(tblResult);
+                return Ok(result);
 
-        // PUT api/<ProductoController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<ProductoController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            }catch(Exception ex)
+            {
+                return BadRequest(ex.Message + ex.Source + ex.InnerException);
+            }
         }
     }
 }
